@@ -1,0 +1,17 @@
+{
+  "name": "1_eslint",
+  "version": "1.0.0",
+  "description": "ejemplo de uso de eslint en node JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node_modules/.bin/eslint src/**"
+  },
+  "author": "John Doe",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0"
+  }
+}
