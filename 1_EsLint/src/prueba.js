@@ -1,3 +1,3 @@
-'use strict';
+// prueba.js
 
-console.log("Hola Mundo ESLint")
+console.log('Hola Mundo ESLint');

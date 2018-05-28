@@ -1,6 +1,7 @@
 // calculator.test.js
 
 /* global describe, it */
+/* eslint-disable import/no-extraneous-dependencies */
 
 const { expect } = require('chai');
 const calculator = require('../src/calculator');
