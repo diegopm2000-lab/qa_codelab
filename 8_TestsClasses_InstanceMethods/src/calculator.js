@@ -1,35 +1,37 @@
 // calculator.js
 
+/* eslint-disable class-methods-use-this */
+
 class Calculator {
-  static add(a, b) {
+  add(a, b) {
     return a + b;
   }
 
-  static minus(a, b) {
+  minus(a, b) {
     return a - b;
   }
 
-  static multiply(a, b) {
+  multiply(a, b) {
     return a * b;
   }
 
-  static divide(a, b) {
+  divide(a, b) {
     if (b === 0) {
       throw new Error("Can't divide by zero");
     }
     return a / b;
   }
 
-  static square(value) {
+  square(value) {
     return value * value;
   }
 
-  static async asyncSquare(value) {
-    return Promise.resolve(Calculator.square(value));
+  async asyncSquare(value) {
+    return Promise.resolve(this.square(value));
   }
 
-  static async asyncCube(value) {
-    const squareResult = await Calculator.asyncSquare(value);
+  async asyncCube(value) {
+    const squareResult = await this.asyncSquare(value);
     return Promise.resolve(squareResult * value);
   }
 }

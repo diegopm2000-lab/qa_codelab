@@ -18,7 +18,8 @@ describe('Calculator - Tests', () => {
       // Expected result
       const expectedResult = 2;
       // Launch operation
-      const result = Calculator.add(a, b);
+      const myCalculator = new Calculator();
+      const result = myCalculator.add(a, b);
       // Check
       expect(result).to.equal(expectedResult);
     });
@@ -30,7 +31,8 @@ describe('Calculator - Tests', () => {
       // Expected result
       const expectedResult = 0;
       // Launch operation
-      const result = Calculator.minus(a, b);
+      const myCalculator = new Calculator();
+      const result = myCalculator.minus(a, b);
       // Check
       expect(result).to.equal(expectedResult);
     });
@@ -42,7 +44,8 @@ describe('Calculator - Tests', () => {
       // Expected result
       const expectedResult = 6;
       // Launch operation
-      const result = Calculator.multiply(a, b);
+      const myCalculator = new Calculator();
+      const result = myCalculator.multiply(a, b);
       // Check
       expect(result).to.equal(expectedResult);
     });
@@ -54,7 +57,8 @@ describe('Calculator - Tests', () => {
       // Expected result
       const expectedResult = 3;
       // Launch operation
-      const result = Calculator.divide(a, b);
+      const myCalculator = new Calculator();
+      const result = myCalculator.divide(a, b);
       // Check
       expect(result).to.equal(expectedResult);
     });
@@ -67,7 +71,8 @@ describe('Calculator - Tests', () => {
       const expectedResult = new Error("Can't divide by zero");
       // Launch operation
       try {
-        Calculator.divide(a, b);
+        const myCalculator = new Calculator();
+        myCalculator.divide(a, b);
       } catch (error) {
         // Check
         expect(error.message).to.equal(expectedResult.message);
@@ -81,7 +86,8 @@ describe('Calculator - Tests', () => {
         // Expected result
         const expectedResult = value * value;
         // Launch operation
-        const result = Calculator.square(value);
+        const myCalculator = new Calculator();
+        const result = myCalculator.square(value);
         // Check
         expect(result).to.equal(expectedResult);
       });
@@ -90,7 +96,7 @@ describe('Calculator - Tests', () => {
         let mySpy;
 
         before((done) => {
-          mySpy = sinon.spy(Calculator, 'square');
+          mySpy = sinon.spy(Calculator.prototype, 'square');
           done();
         });
 
@@ -105,7 +111,8 @@ describe('Calculator - Tests', () => {
           // Expected result
           const expectedResult = value * value;
           // Launch operation
-          const result = await Calculator.asyncSquare(value);
+          const myCalculator = new Calculator();
+          const result = await myCalculator.asyncSquare(value);
           // Check
           expect(result).to.equal(expectedResult);
           assert(mySpy.calledWith(value));
@@ -116,7 +123,7 @@ describe('Calculator - Tests', () => {
         let myStub;
 
         before((done) => {
-          myStub = sinon.stub(Calculator, 'square').returns(100);
+          myStub = sinon.stub(Calculator.prototype, 'square').returns(100);
           done();
         });
 
@@ -131,7 +138,8 @@ describe('Calculator - Tests', () => {
           // Expected result
           const expectedResult = value * value;
           // Launch operation
-          const result = await Calculator.asyncSquare(value);
+          const myCalculator = new Calculator();
+          const result = await myCalculator.asyncSquare(value);
           // Check
           expect(result).to.equal(expectedResult);
         });
@@ -141,7 +149,7 @@ describe('Calculator - Tests', () => {
         let myStub;
 
         before((done) => {
-          myStub = sinon.stub(Calculator, 'asyncSquare').resolves(100);
+          myStub = sinon.stub(Calculator.prototype, 'asyncSquare').resolves(100);
           done();
         });
 
@@ -156,8 +164,8 @@ describe('Calculator - Tests', () => {
           // Expected result
           const expectedResult = value * value * value;
           // Launch operation
-          // Launch operation
-          const result = await Calculator.asyncCube(value);
+          const myCalculator = new Calculator();
+          const result = await myCalculator.asyncCube(value);
           // Check
           expect(result).to.equal(expectedResult);
         });
