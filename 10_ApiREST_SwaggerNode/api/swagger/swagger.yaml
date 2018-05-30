@@ -1,0 +1,94 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Unit Testing Swagger Node Lab
+# during dev, should point to your local machine
+host: localhost:8080
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /users:
+    x-swagger-router-controller: user.controller
+    get:
+      description: get the user list
+      operationId: getUsers
+      parameters:
+        - name: name
+          in: query
+          type: string
+          required: false
+        - name: surname
+          in: query
+          type: string
+          required: false
+        - name: loginname
+          in: query
+          type: string
+          required: false
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetUserListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  GetUserResponse:
+    type: object
+    properties:
+      id:
+        type: string
+        description: identifier
+      name:
+        type: string
+        description: Name of the user
+      surname:
+        type: string
+        description: Surname of the user
+      loginname:
+        type: string
+        description: Loginname of the user
+    required:
+      - id
+      - name
+      - surname
+      - loginname
+  GetUserListResponse:
+    required:
+      - users
+    properties:
+      users:
+        type: array
+        items:
+          $ref: "#/definitions/GetUserResponse"
+  ErrorResponse:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/ErrorIntResponse'
+  ErrorIntResponse:
+    properties:
+      code:
+        type: number
+      message:
+        type: string
+      description:
+        type: string
+    required:
+      - message

@@ -1,0 +1,36 @@
+// log.helper.js
+
+const Log = require('log-color');
+
+// //////////////////////////////////////////////////////////////////////////////
+// CONSTANTS & PROPERTIES
+// //////////////////////////////////////////////////////////////////////////////
+
+let logger = new Log({ level: 'debug', color: true });
+
+// //////////////////////////////////////////////////////////////////////////////
+// PUBLIC FUNCTIONS
+// //////////////////////////////////////////////////////////////////////////////
+
+function setTraceLevel(levelIN) {
+  logger = new Log({ level: levelIN, color: true });
+}
+
+function debug(message) {
+  logger.debug(message);
+}
+
+function info(message) {
+  logger.info(message);
+}
+
+function error(message) {
+  logger.error(message);
+}
+
+module.exports = {
+  setTraceLevel,
+  debug,
+  info,
+  error,
+};
