@@ -24,15 +24,17 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "istanbul": "^0.4.5",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "^5.2.0",
+    "proxyquire": "^2.0.1",
     "should": "^7.1.0",
+    "sinon": "^5.0.10",
     "supertest": "^1.0.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test",
-    "cover": "istanbul cover --include-all-sources --root ./api node_modules/.bin/_mocha -- --recursive test/",
-    "lint": "node_modules/.bin/eslint api/** app.js"
+    "lint": "node_modules/.bin/eslint api/** app.js",
+    "test": "node ./node_modules/mocha/bin/mocha --recursive --reporter spec",
+    "cover": "istanbul cover node_modules/.bin/_mocha -- --recursive test/"
   }
 }
