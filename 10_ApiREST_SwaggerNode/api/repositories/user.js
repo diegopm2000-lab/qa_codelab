@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   surname: String,
   loginname: String,
+  password: String,
 });
 
 userSchema.plugin(mongooseHidden); // to hidden _id and __v in query results

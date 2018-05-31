@@ -9,9 +9,14 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.12.3",
+    "express-healthcheck": "^0.1.0",
+    "frameguard": "^3.0.0",
+    "helmet": "^3.12.1",
     "log-color": "^1.0.0",
     "mongoose": "^5.1.2",
     "mongoose-hidden": "^1.5.3",
+    "read-yaml": "^1.1.0",
+    "shortid": "^2.2.8",
     "swagger-express-mw": "^0.7.0"
   },
   "devDependencies": {

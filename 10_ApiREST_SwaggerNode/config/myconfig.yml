@@ -1,0 +1,7 @@
+---
+appName: "API REST CRUD Example for QA Lab"
+logLevel: debug #Log information level
+
+mongodatabase:
+  mongoURL: mongodb://localhost:27017
+  database: qalab
