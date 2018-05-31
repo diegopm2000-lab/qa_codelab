@@ -13,10 +13,10 @@ const MODULE_NAME = '[User Service]';
 // PUBLIC FUNCTIONS
 // //////////////////////////////////////////////////////////////////////////////
 
-async function getUsers(params) {
-  log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> params: ${JSON.stringify(params)}`);
+async function getUsers(filter) {
+  log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> params: ${JSON.stringify(filter)}`);
 
-  const result = await userRepository.getUsers(params);
+  const result = await userRepository.getUsers(filter);
 
   log.info(`${MODULE_NAME} ${getUsers.name} (OUT) -> result: ${JSON.stringify(result)}`);
   return result;
@@ -58,10 +58,10 @@ async function updateUser(userIN) {
   return result;
 }
 
-async function deleteUser(userIN) {
-  log.info(`${MODULE_NAME} ${deleteUser.name} (IN) -> params: ${JSON.stringify(userIN)}`);
+async function deleteUser(id) {
+  log.info(`${MODULE_NAME} ${deleteUser.name} (IN) -> id: ${JSON.stringify(id)}`);
 
-  const result = await userRepository.deleteUser(userIN);
+  const result = await userRepository.deleteUser(id);
 
   log.info(`${MODULE_NAME} ${deleteUser.name} (OUT) -> result: ${JSON.stringify(result)}`);
   return result;

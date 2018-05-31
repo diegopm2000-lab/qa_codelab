@@ -20,10 +20,12 @@ const User = mongoose.model('User');
 // PUBLIC FUNCTIONS
 // //////////////////////////////////////////////////////////////////////////////
 
-async function getUsers(params) {
-  log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> params: ${JSON.stringify(params)}`);
+async function getUsers(filter) {
+  log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> filter: ${JSON.stringify(filter)}`);
 
-  const result = await User.find(params);
+  mongoose.set('debug', true);
+  // const result = await User.find(params);
+  const result = await User.find(filter);
 
   log.info(`${MODULE_NAME} ${getUsers.name} (OUT) -> result: ${JSON.stringify(result)}`);
   return result;

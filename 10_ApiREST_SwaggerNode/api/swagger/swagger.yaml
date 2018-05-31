@@ -45,10 +45,109 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+    post:
+      description: add a new user to the list
+      operationId: createUser
+      parameters:
+        - in: body
+          name: user
+          description: The user to create.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetUserResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /users/{id}:
+    x-swagger-router-controller: user.controller
+    get:
+      description: get a user by Id
+      operationId: getUserById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetUserResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: update a user
+      operationId: updateUser
+      parameters:
+        - name: id
+          description: user id
+          type: string
+          in: path
+          required: true
+        - in: body
+          name: user
+          description: The user to update.
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetUserResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+    delete:
+      description: delete a user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          description: user id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+  User:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Name of the user
+      surname:
+        type: string
+        description: Surname of the user
+      loginname:
+        type: string
+        description: Loginname of the user
+      password:
+        type: string
+        description: Password of the user
+    required:
+      - name
+      - surname
+      - loginname
+      - password
   GetUserResponse:
     type: object
     properties:
@@ -64,11 +163,15 @@ definitions:
       loginname:
         type: string
         description: Loginname of the user
+      password:
+        type: string
+        description: Password of the user
     required:
       - id
       - name
       - surname
       - loginname
+      - password
   GetUserListResponse:
     required:
       - users
@@ -77,6 +180,13 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/GetUserResponse"
+  GeneralResponse:
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
   ErrorResponse:
     type: object
     properties:
