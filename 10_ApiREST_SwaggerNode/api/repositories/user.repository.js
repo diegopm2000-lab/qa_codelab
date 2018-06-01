@@ -20,11 +20,11 @@ const User = mongoose.model('User');
 // PUBLIC FUNCTIONS
 // //////////////////////////////////////////////////////////////////////////////
 
+// console.log('user.repository cargado!');
+
 async function getUsers(filter) {
   log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> filter: ${JSON.stringify(filter)}`);
 
-  mongoose.set('debug', true);
-  // const result = await User.find(params);
   const result = await User.find(filter);
 
   log.info(`${MODULE_NAME} ${getUsers.name} (OUT) -> result: ${JSON.stringify(result)}`);
@@ -74,7 +74,7 @@ async function updateUser(UserIN) {
     password: UserIN.password,
   });
   log.info(`${MODULE_NAME} ${updateUser.name} -> resultUpdate: ${JSON.stringify(resultUpdate)}`);
-  const result = await getUserById(UserIN.id);
+  const result = await module.exports.getUserById(UserIN.id);
 
   log.info(`${MODULE_NAME} ${updateUser.name} (OUT) -> result: ${JSON.stringify(result)}`);
   return result;
