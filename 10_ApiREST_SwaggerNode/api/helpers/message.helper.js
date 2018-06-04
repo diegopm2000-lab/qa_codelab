@@ -22,12 +22,12 @@ function buildGenericMessage(nameMessage, textMessage) {
 // //////////////////////////////////////////////////////////////////////////////
 
 function buildErrorMessage(text) {
-  const jsonErrorMessage = buildGenericMessage(TITLE_ERROR, text);
+  const jsonErrorMessage = module.exports.buildGenericMessage(TITLE_ERROR, text);
   return jsonErrorMessage;
 }
 
 function buildMessage(text) {
-  const jsonErrorMessage = buildGenericMessage(TITLE_MESSAGE, text);
+  const jsonErrorMessage = module.exports.buildGenericMessage(TITLE_MESSAGE, text);
   return jsonErrorMessage;
 }
 
