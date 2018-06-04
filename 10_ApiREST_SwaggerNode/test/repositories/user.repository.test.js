@@ -24,13 +24,13 @@ let userRepository;
 describe('UserRepository - Tests', () => {
   before((done) => {
     User = proxyquire(
-      '../../../api/repositories/user',
+      '../../api/repositories/user',
       {
         mongoose,
       } // eslint-disable-line comma-dangle
     );
     userRepository = proxyquire(
-      '../../../api/repositories/user.repository',
+      '../../api/repositories/user.repository',
       {
         '../helpers/log.helper': loggerMock,
         mongoose,

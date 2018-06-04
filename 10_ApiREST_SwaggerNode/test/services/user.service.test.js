@@ -15,7 +15,7 @@ let userService;
 describe('User Service - Tests', () => {
   before(() => {
     userService = proxyquire(
-      '../../../api/services/user.service',
+      '../../api/services/user.service',
       {
         '../helpers/log.helper': loggerMock,
         '../repositories/user.repository': userRepositoryMock,
