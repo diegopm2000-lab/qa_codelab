@@ -2,6 +2,10 @@
 
 /* eslint-disable no-unused-vars */
 
+function setTraceLevel(params) {
+
+}
+
 function debug(text) {
 
 }
@@ -15,6 +19,7 @@ function error(text) {
 }
 
 module.exports = {
+  setTraceLevel,
   debug,
   info,
   error,

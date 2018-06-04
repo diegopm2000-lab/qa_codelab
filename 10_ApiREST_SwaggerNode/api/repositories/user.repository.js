@@ -1,8 +1,10 @@
-// users.repository.js
+// user.repository.js
 
 const log = require('../helpers/log.helper');
 const mongoose = require('mongoose');
 const shortid = require('shortid');
+
+console.log('user.repository cargado con EXITO!');
 
 // //////////////////////////////////////////////////////////////////////////////
 // CONSTANTS

@@ -53,6 +53,7 @@ function init() {
   initSecurity();
   configHelper.loadConfigFromYmlFile(configPath)
   // configHelper.loadConfigFromHost(configHost, configPath)
+    .then(() => mongooseHelper.connect())
     .then((result) => {
       try {
         configHelper.setConfig(result);
@@ -79,13 +80,13 @@ function init() {
           swaggerExpress.register(app);
 
           log.info(`App Server started at port: ${port}`);
+          console.log('App cargada con EXITO!');
         });
       } catch (err) {
         log.error(err);
         throw err;
       }
     })
-    .then(() => mongooseHelper.connect())
     .catch((err) => {
       log.error(`Failed to start App Server, error: ${err.stack}`);
       throw err;
@@ -93,6 +94,7 @@ function init() {
 }
 
 function stop() {
+  console.log('parando el servidor...');
   module.exports.server.close(() => { log.richInfoApp('App Server stopped'); });
 }
 

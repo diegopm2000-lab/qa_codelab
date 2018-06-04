@@ -5,6 +5,8 @@ const controllerHelper = require('../helpers/controller.helper');
 const messageHelper = require('../helpers/message.helper');
 const userService = require('../services/user.service');
 
+console.log('user.controller cargado con EXITO!');
+
 // //////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 // //////////////////////////////////////////////////////////////////////////////
@@ -26,6 +28,7 @@ const USER_DELETED_SUCCESSFULLY = 'User deleted successfully';
 
 async function getUsers(req, res) {
   try {
+    console.log('Entrando en getUsers de user.controller');
     const filter = {};
     // Receiving parameters
     const name = req.swagger.params.name.value;
@@ -46,6 +49,7 @@ async function getUsers(req, res) {
     log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> filter: ${filter}`);
 
     // Call to service
+    console.log('antes de llamar a getUsers en user.controller');
     const result = await userService.getUsers(filter);
 
     // Returning the result

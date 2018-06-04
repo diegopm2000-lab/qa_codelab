@@ -15,7 +15,7 @@ const loggerMock = require('./logger.mock');
 let myConfigHelper;
 
 describe('ConfigHelper - Tests', () => {
-  before(() => {
+  before((done) => {
     myConfigHelper = proxyquire(
       '../../api/helpers/config.helper',
       {
@@ -23,6 +23,7 @@ describe('ConfigHelper - Tests', () => {
         '../helpers/log.helper': loggerMock,
       } // eslint-disable-line comma-dangle
     );
+    done();
   });
 
   describe('SetConfig & getConfig - Tests', () => {

@@ -16,8 +16,14 @@ const usuario2 = {
 
 const usuarios = [usuario1, usuario2];
 
+const config = {
+  appName: 'API REST CRUD Example for QA Lab',
+  logLevel: 'debug',
+};
+
 module.exports = {
   usuario1,
   usuario2,
   usuarios,
+  config,
 };
