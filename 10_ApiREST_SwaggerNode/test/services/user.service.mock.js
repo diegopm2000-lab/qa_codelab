@@ -6,7 +6,7 @@ console.log('user.service.mock cargado con EXITO!');
 
 function getUsers(filters) {
   console.log('Entrando en getUsers de user.service.mock');
-  return Promise.resolve({});
+  return Promise.resolve([]);
 }
 
 function getUserById(id) {

@@ -30,6 +30,7 @@
     "proxyquire": "^2.0.1",
     "should": "^7.1.0",
     "sinon": "^5.0.10",
+    "sinon-stub-promise": "^4.0.0",
     "supertest": "^1.2.0"
   },
   "scripts": {

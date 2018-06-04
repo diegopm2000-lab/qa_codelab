@@ -26,7 +26,7 @@ const USER_DELETED_SUCCESSFULLY = 'User deleted successfully';
 // PUBLIC METHODS
 // //////////////////////////////////////////////////////////////////////////////
 
-async function getUsers(req, res) {
+function getUsers(req, res) {
   try {
     console.log('Entrando en getUsers de user.controller');
     const filter = {};
@@ -50,11 +50,18 @@ async function getUsers(req, res) {
 
     // Call to service
     console.log('antes de llamar a getUsers en user.controller');
-    const result = await userService.getUsers(filter);
+    userService.getUsers(filter)
+      .then((result) => {
+        console.log(`Obtenemos antes de devolver el resultado: result: ${result}`);
 
-    // Returning the result
-    log.info(`${MODULE_NAME} ${getUsers.name} (OUT) -> result: ${JSON.stringify(result)}`);
-    res.json(result);
+        // Returning the result
+        log.info(`${MODULE_NAME} ${getUsers.name} (OUT) -> result: ${JSON.stringify(result)}`);
+        res.json(result);
+      })
+      .catch((error) => {
+        controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
+      });
+
   } catch (error) {
     controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
   }

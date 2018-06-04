@@ -16,7 +16,7 @@ const MODULE_NAME = '[User Mongo Repository]';
 // SCHEMA
 // //////////////////////////////////////////////////////////////////////////////
 
-const User = mongoose.model('User');
+// const User = mongoose.model('User');
 
 // //////////////////////////////////////////////////////////////////////////////
 // PUBLIC FUNCTIONS
@@ -25,6 +25,7 @@ const User = mongoose.model('User');
 // console.log('user.repository cargado!');
 
 async function getUsers(filter) {
+  console.log('Entrando en getUsers de user.repository');
   log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> filter: ${JSON.stringify(filter)}`);
 
   const result = await User.find(filter);

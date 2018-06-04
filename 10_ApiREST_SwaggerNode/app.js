@@ -1,5 +1,7 @@
 // app.js
 
+console.log('----> empezando a cargar el modulo app.js');
+
 const SwaggerExpress = require('swagger-express-mw');
 const app = require('express')();
 const healthcheck = require('express-healthcheck');
@@ -29,6 +31,8 @@ const config = {
 
 // Application Server started using Express
 let server;
+
+console.log('modulo app.js cargado con EXITO!');
 
 // //////////////////////////////////////////////////////////////////////////////
 // PRIVATE FUNCTIONS
@@ -65,16 +69,18 @@ function init() {
             log.error(`Failed to start App, error: ${err.stack}`);
             throw err;
           }
-
+         
           const port = module.exports.configPort || defaultPort;
-          module.exports.server = app.listen(port);
-
+          
+          if (!module.parent) {
+            module.exports.server = app.listen(port);
+          }
           // Healthcheck
-          app.use('/healthcheck', healthcheck({
-            healthy() {
-              return { everything: 'is ok' };
-            },
-          }));
+          // app.use('/healthcheck', healthcheck({
+          //   healthy() {
+          //     return { everything: 'is ok' };
+          //   },
+          // }));
 
           // Install middleware
           swaggerExpress.register(app);

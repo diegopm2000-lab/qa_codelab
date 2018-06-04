@@ -3,6 +3,8 @@
 const log = require('../helpers/log.helper');
 const userRepository = require('../repositories/user.repository');
 
+console.log('user.service cargado con EXITO!');
+
 // //////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 // //////////////////////////////////////////////////////////////////////////////
@@ -14,6 +16,7 @@ const MODULE_NAME = '[User Service]';
 // //////////////////////////////////////////////////////////////////////////////
 
 async function getUsers(filter) {
+  console.log('Entrando en getUsers de user.service!');
   log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> params: ${JSON.stringify(filter)}`);
 
   const result = await userRepository.getUsers(filter);
