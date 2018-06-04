@@ -61,7 +61,6 @@ function getUsers(req, res) {
       .catch((error) => {
         controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
       });
-
   } catch (error) {
     controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
   }

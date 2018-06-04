@@ -25,13 +25,13 @@ describe('UserController - Tests', () => {
     console.log('Entrando en before principal...');
     // Repositories
     myUserRepository = proxyquire(
-      '../repositories/user.repository.mock.js',
+      '../repositories/user.repository.mock',
       {} // eslint-disable-line comma-dangle
     );
 
     // Services
     myUserService = proxyquire(
-      '../../api/services/user.service.js',
+      '../../api/services/user.service',
       {
         '../helpers/log.helper': loggerMock,
         '../repositories/user.repository': myUserRepository,
@@ -58,7 +58,7 @@ describe('UserController - Tests', () => {
     );
 
     supertest = request(myServer.app);
-    console.log('saliendo del before principal');
+    console.log('----> saliendo del before principal');
   });
 
   describe('UserController - getUsers Successfully CASE', () => {
@@ -75,7 +75,6 @@ describe('UserController - Tests', () => {
     });
 
     it('UserController - getUsers Successfully CASE', (done) => {
-
       setTimeout(() => {
         supertest
           .get('/users')
@@ -95,7 +94,7 @@ describe('UserController - Tests', () => {
               done();
             }
           });
-      }, 1000);
+      }, 1500);
     });
   });
 });

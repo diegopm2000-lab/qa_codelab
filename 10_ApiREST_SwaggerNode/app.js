@@ -32,7 +32,7 @@ const config = {
 // Application Server started using Express
 let server;
 
-console.log('modulo app.js cargado con EXITO!');
+console.log('----> modulo app.js cargado con EXITO!');
 
 // //////////////////////////////////////////////////////////////////////////////
 // PRIVATE FUNCTIONS
@@ -55,11 +55,12 @@ function initSecurity() {
 
 function init() {
   initSecurity();
-  configHelper.loadConfigFromYmlFile(configPath)
-  // configHelper.loadConfigFromHost(configHost, configPath)
-    .then(() => mongooseHelper.connect())
+  mongooseHelper.connect()
+    .then(() => configHelper.loadConfigFromYmlFile(configPath))
     .then((result) => {
       try {
+        console.log(`result:${JSON.stringify(result)}`);
+        console.log('resuelto ya la conexion a mongoose...procedemos con el resto');
         configHelper.setConfig(result);
         log.info(`Set trace level to: ${result.logLevel}`);
         log.setTraceLevel(result.logLevel);
@@ -86,7 +87,7 @@ function init() {
           swaggerExpress.register(app);
 
           log.info(`App Server started at port: ${port}`);
-          console.log('App cargada con EXITO!');
+          console.log('-----> App cargada con EXITO!');
         });
       } catch (err) {
         log.error(err);
