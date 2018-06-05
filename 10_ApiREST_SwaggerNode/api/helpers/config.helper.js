@@ -41,6 +41,7 @@ function loadConfigFromYmlFile(file) {
       readYaml(file, (error, data) => {
         if (!error) {
           log.info(`${MODULE_NAME} ${loadConfigFromYmlFile.name} (OUT) --> ${JSON.stringify(data)}`);
+          console.log(`resolviendo fichero con datos: ${JSON.stringify(data)}`);
           resolve(data);
         } else {
           log.error(`${MODULE_NAME} ${loadConfigFromYmlFile.name} (ERROR) --> error: ${error.message}`);

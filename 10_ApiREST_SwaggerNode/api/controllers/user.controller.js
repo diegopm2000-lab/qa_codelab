@@ -26,9 +26,8 @@ const USER_DELETED_SUCCESSFULLY = 'User deleted successfully';
 // PUBLIC METHODS
 // //////////////////////////////////////////////////////////////////////////////
 
-function getUsers(req, res) {
+async function getUsers(req, res) {
   try {
-    console.log('Entrando en getUsers de user.controller');
     const filter = {};
     // Receiving parameters
     const name = req.swagger.params.name.value;
@@ -49,18 +48,9 @@ function getUsers(req, res) {
     log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> filter: ${filter}`);
 
     // Call to service
-    console.log('antes de llamar a getUsers en user.controller');
-    userService.getUsers(filter)
-      .then((result) => {
-        console.log(`Obtenemos antes de devolver el resultado: result: ${result}`);
+    const result = await userService.getUsers(filter);
 
-        // Returning the result
-        log.info(`${MODULE_NAME} ${getUsers.name} (OUT) -> result: ${JSON.stringify(result)}`);
-        res.json(result);
-      })
-      .catch((error) => {
-        controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
-      });
+    res.json(result);
   } catch (error) {
     controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
   }
@@ -87,7 +77,7 @@ async function getUserById(req, res) {
       res.status(404).json(messageHelper.buildMessage(USER_NOT_FOUND));
     }
   } catch (error) {
-    controllerHelper.handleErrorResponse(MODULE_NAME, getUsers.name, error, res);
+    controllerHelper.handleErrorResponse(MODULE_NAME, getUserById.name, error, res);
   }
 }
 
@@ -128,7 +118,7 @@ async function updateUser(req, res) {
     // Returning the result
     if (result) {
       log.info(`${MODULE_NAME} ${updateUser.name} (OUT) -> result: ${JSON.stringify(result)}`);
-      res.status(201).json(result);
+      res.status(200).json(result);
     } else {
       log.info(`${MODULE_NAME} ${updateUser.name} (OUT) -> result: ${USER_NOT_UPDATED}`);
       res.status(409).json(messageHelper.buildMessage(USER_NOT_UPDATED));

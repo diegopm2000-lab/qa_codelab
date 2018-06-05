@@ -55,33 +55,35 @@ function initSecurity() {
 
 function init() {
   initSecurity();
-  mongooseHelper.connect()
-    .then(() => configHelper.loadConfigFromYmlFile(configPath))
+  configHelper.loadConfigFromYmlFile(configPath)
     .then((result) => {
+      log.info(`Configuracion cargada:${JSON.stringify(result)}`);
+      configHelper.setConfig(result);
+      log.info(`Set trace level to: ${result.logLevel}`);
+      log.setTraceLevel(result.logLevel);
+    })
+    .then(() => {
+      mongooseHelper.connect();
+    })
+    .then(() => {
       try {
-        console.log(`result:${JSON.stringify(result)}`);
-        console.log('resuelto ya la conexion a mongoose...procedemos con el resto');
-        configHelper.setConfig(result);
-        log.info(`Set trace level to: ${result.logLevel}`);
-        log.setTraceLevel(result.logLevel);
-
         SwaggerExpress.create(config, (err, swaggerExpress) => {
           if (err) {
             log.error(`Failed to start App, error: ${err.stack}`);
             throw err;
           }
-         
+
           const port = module.exports.configPort || defaultPort;
-          
+
           if (!module.parent) {
             module.exports.server = app.listen(port);
           }
           // Healthcheck
-          // app.use('/healthcheck', healthcheck({
-          //   healthy() {
-          //     return { everything: 'is ok' };
-          //   },
-          // }));
+          app.use('/healthcheck', healthcheck({
+            healthy() {
+              return { everything: 'is ok' };
+            },
+          }));
 
           // Install middleware
           swaggerExpress.register(app);
