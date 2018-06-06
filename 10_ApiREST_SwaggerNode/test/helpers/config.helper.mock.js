@@ -9,13 +9,11 @@ function setConfig(config) {
 }
 
 function getConfig() {
-
+  return expectations.config;
 }
 
 function loadConfigFromYmlFile(file) {
-  console.log('Entrando en loadConfigFromYmlFile del config.helper.mock');
   return new Promise((resolve) => {
-    console.log(`config: ${JSON.stringify(expectations.config)}`);
     resolve(expectations.config);
   })
 }

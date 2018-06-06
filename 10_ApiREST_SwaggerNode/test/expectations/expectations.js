@@ -19,6 +19,10 @@ const usuarios = [usuario1, usuario2];
 const config = {
   appName: 'API REST CRUD Example for QA Lab',
   logLevel: 'debug',
+  mongodatabase: {
+    mongoURL: 'mongodb://localhost:27017',
+    database: 'qalab',
+  },
 };
 
 module.exports = {

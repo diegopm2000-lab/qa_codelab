@@ -5,8 +5,6 @@ const controllerHelper = require('../helpers/controller.helper');
 const messageHelper = require('../helpers/message.helper');
 const userService = require('../services/user.service');
 
-console.log('user.controller cargado con EXITO!');
-
 // //////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 // //////////////////////////////////////////////////////////////////////////////

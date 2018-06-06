@@ -21,7 +21,7 @@ let myControllerHelper;
 let supertest;
 let myServer;
 
-const timeTest = 200;
+const timeTest = 20;
 
 describe('UserController - Tests', () => {
   before(() => {
@@ -593,7 +593,7 @@ describe('UserController - Tests', () => {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(409)
-            .end((err,res) => {
+            .end((err, res) => {
               if (err) {
                 done(err);
               } else {

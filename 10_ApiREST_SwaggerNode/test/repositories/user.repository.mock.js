@@ -2,10 +2,7 @@
 
 /* eslint-disable no-unused-vars */
 
-console.log('cargado el user.repository.mock con EXITO!');
-
 function getUsers(filter) {
-  console.log('Entrando en getUsers de user.repository.mock');
   return Promise.resolve([]);
 }
 

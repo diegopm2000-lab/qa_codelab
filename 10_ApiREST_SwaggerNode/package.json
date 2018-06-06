@@ -36,7 +36,7 @@
   "scripts": {
     "start": "node app.js",
     "lint": "node_modules/.bin/eslint api/** app.js",
-    "test": "node ./node_modules/mocha/bin/mocha --recursive --reporter spec",
-    "cover": "istanbul cover node_modules/.bin/_mocha -- --recursive test/"
+    "test": "node ./node_modules/mocha/bin/mocha --recursive --reporter spec --exit",
+    "cover": "istanbul cover node_modules/.bin/_mocha -- --recursive -- test/"
   }
 }

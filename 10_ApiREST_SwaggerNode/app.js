@@ -1,7 +1,5 @@
 // app.js
 
-console.log('----> empezando a cargar el modulo app.js');
-
 const SwaggerExpress = require('swagger-express-mw');
 const app = require('express')();
 const healthcheck = require('express-healthcheck');
@@ -31,8 +29,6 @@ const config = {
 
 // Application Server started using Express
 let server;
-
-console.log('----> modulo app.js cargado con EXITO!');
 
 // //////////////////////////////////////////////////////////////////////////////
 // PRIVATE FUNCTIONS
@@ -75,9 +71,8 @@ function init() {
 
           const port = module.exports.configPort || defaultPort;
 
-          if (!module.parent) {
-            module.exports.server = app.listen(port);
-          }
+          module.exports.server = app.listen(port);
+
           // Healthcheck
           app.use('/healthcheck', healthcheck({
             healthy() {
@@ -89,7 +84,6 @@ function init() {
           swaggerExpress.register(app);
 
           log.info(`App Server started at port: ${port}`);
-          console.log('-----> App cargada con EXITO!');
         });
       } catch (err) {
         log.error(err);
@@ -103,8 +97,7 @@ function init() {
 }
 
 function stop() {
-  console.log('parando el servidor...');
-  module.exports.server.close(() => { log.richInfoApp('App Server stopped'); });
+  module.exports.server.close(() => { log.info('App Server stopped'); });
 }
 
 // //////////////////////////////////////////////////////////////////////////////

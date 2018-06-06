@@ -4,8 +4,6 @@ const log = require('../helpers/log.helper');
 const mongoose = require('mongoose');
 const shortid = require('shortid');
 
-console.log('user.repository cargado con EXITO!');
-
 // //////////////////////////////////////////////////////////////////////////////
 // CONSTANTS
 // //////////////////////////////////////////////////////////////////////////////
@@ -25,7 +23,6 @@ const User = mongoose.model('User');
 // console.log('user.repository cargado!');
 
 async function getUsers(filter) {
-  console.log('Entrando en getUsers de user.repository');
   log.info(`${MODULE_NAME} ${getUsers.name} (IN) -> filter: ${JSON.stringify(filter)}`);
 
   const result = await User.find(filter);

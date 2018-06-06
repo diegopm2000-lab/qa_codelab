@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const configHelper = require('../helpers/config.helper');
 const log = require('../helpers/log.helper');
 
-console.log('Se pone a cargar el puto mongoose helper!!!');
-
 // //////////////////////////////////////////////////////////////////////////////
 // REGISTER MODELS
 // //////////////////////////////////////////////////////////////////////////////
