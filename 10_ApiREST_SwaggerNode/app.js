@@ -87,12 +87,12 @@ function init() {
         });
       } catch (err) {
         log.error(err);
-        throw err;
+        // throw err;
       }
     })
     .catch((err) => {
       log.error(`Failed to start App Server, error: ${err.stack}`);
-      throw err;
+      // throw err;
     });
 }
 

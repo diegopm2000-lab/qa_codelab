@@ -128,14 +128,19 @@ describe('MongooseHelper - Tests', () => {
               done(err);
             }
           } catch (error) {
-            console.error(error.message);
+            // console.error(error.message);
           }
         });
       } catch (error) {
-        console.log(`-------------------> Error final: ${error.message}`);
+        // console.log(`-------------------> Error final: ${error.message}`);
       }
       // Launch operation
-      await myMongooseHelper.connect();
+      try {
+        await myMongooseHelper.connect();
+      } catch (error) {
+        // console.error(error.message);
+      }
+      
     });
   });
 });
