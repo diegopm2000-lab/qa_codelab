@@ -140,7 +140,6 @@ describe('MongooseHelper - Tests', () => {
       } catch (error) {
         // console.error(error.message);
       }
-      
     });
   });
 });
