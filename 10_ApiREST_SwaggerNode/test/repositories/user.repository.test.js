@@ -18,7 +18,6 @@ const expectations = require('../expectations/expectations');
 
 let User;
 
-// const userRepository = require('../../../api/repositories/user.repository');
 let userRepository;
 
 describe('UserRepository - Tests', () => {

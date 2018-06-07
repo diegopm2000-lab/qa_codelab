@@ -2,5 +2,5 @@ projectKey=ApiRestQALab
 serverUrl=http://localhost:9000
 serverVersion=6.5.0.27846
 dashboardUrl=http://localhost:9000/dashboard/index/ApiRestQALab
-ceTaskId=AWPV2azlmNKl62F8pMp0
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AWPV2azlmNKl62F8pMp0
+ceTaskId=AWPZpOlvW2l4vzhmHQD1
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWPZpOlvW2l4vzhmHQD1

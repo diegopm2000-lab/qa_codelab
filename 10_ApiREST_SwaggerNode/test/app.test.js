@@ -9,8 +9,6 @@ const proxyquire = require('proxyquire').noCallThru();
 const SwaggerExpress = require('swagger-express-mw');
 const request = require('supertest');
 
-const sinonStubPromise = require('sinon-stub-promise');
-
 const expectations = require('../test/expectations/expectations');
 
 const configHelperMock = require('../test/helpers/config.helper.mock');
@@ -20,9 +18,6 @@ const loggerMock = require('../test/helpers/logger.mock');
 let supertest;
 
 let myServer;
-
-// Inits of sinonStubPromise
-sinonStubPromise(sinon);
 
 describe('App - Tests', () => {
   before((done) => {
