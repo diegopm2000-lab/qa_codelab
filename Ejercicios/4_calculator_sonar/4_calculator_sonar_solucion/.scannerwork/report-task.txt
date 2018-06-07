@@ -1,0 +1,6 @@
+projectKey=calculatorNodeJS
+serverUrl=http://localhost:9000
+serverVersion=7.0.0.36138
+dashboardUrl=http://localhost:9000/dashboard/index/calculatorNodeJS
+ceTaskId=AWPayoLFt23fQoSoEI8H
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWPayoLFt23fQoSoEI8H
