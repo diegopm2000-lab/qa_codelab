@@ -2,7 +2,7 @@
 
 /* eslint-disable */
 
-const expectations = require('../expectations/expectations');
+const expectations = require('../../expectations/expectations');
 
 function setConfig(config) {
 

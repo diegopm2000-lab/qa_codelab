@@ -6,14 +6,14 @@ const { assert } = require('chai');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 
-const LogMock = require('./LogMock');
+const LogMock = require('../../mock/external/LogMock');
 
 let myLogHelper;
 
 describe('LogHelper - Tests', () => {
   before(() => {
     myLogHelper = proxyquire(
-      '../../api/helpers/log.helper',
+      '../../../api/helpers/log.helper',
       {
         'log-color': LogMock,
       } // eslint-disable-line comma-dangle

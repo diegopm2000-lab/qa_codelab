@@ -8,11 +8,11 @@ const request = require('supertest');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 
-const expectations = require('../expectations/expectations');
+const expectations = require('../../expectations/expectations');
 
-const configHelperMock = require('../helpers/config.helper.mock');
-const mongooseHelperMock = require('../helpers/mongoose.helper.mock');
-const loggerMock = require('../helpers/logger.mock');
+const configHelperMock = require('../../mock/helpers/config.helper.mock');
+const mongooseHelperMock = require('../../mock/helpers/mongoose.helper.mock');
+const loggerMock = require('../../mock/helpers/logger.mock');
 
 let myUserRepository;
 let myUserService;
@@ -27,13 +27,13 @@ describe('UserController - Tests', () => {
   before(() => {
     // Repositories
     myUserRepository = proxyquire(
-      '../repositories/user.repository.mock',
+      '../../mock/repositories/user.repository.mock',
       {} // eslint-disable-line comma-dangle
     );
 
     // Services
     myUserService = proxyquire(
-      '../../api/services/user.service',
+      '../../../api/services/user.service',
       {
         '../helpers/log.helper': loggerMock,
         '../repositories/user.repository': myUserRepository,
@@ -41,7 +41,7 @@ describe('UserController - Tests', () => {
     );
 
     myControllerHelper = proxyquire(
-      '../../api/helpers/controller.helper',
+      '../../../api/helpers/controller.helper',
       {
         './log.helper': loggerMock,
       } // eslint-disable-line comma-dangle
@@ -49,7 +49,7 @@ describe('UserController - Tests', () => {
 
     // Controllers
     myUserController = proxyquire( // eslint-disable-line no-undef
-      '../../api/controllers/user.controller',
+      '../../../api/controllers/user.controller',
       {
         '../helpers/log.helper': loggerMock,
         '../helpers/controller.helper': myControllerHelper,
@@ -59,7 +59,7 @@ describe('UserController - Tests', () => {
 
     // App
     myServer = proxyquire(
-      '../../app',
+      '../../../app',
       {
         './api/helpers/log.helper': loggerMock,
         './api/helpers/config.helper': configHelperMock,

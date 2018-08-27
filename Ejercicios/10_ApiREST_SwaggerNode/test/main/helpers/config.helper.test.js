@@ -5,11 +5,11 @@
 const { expect } = require('chai');
 const proxyquire = require('proxyquire').noCallThru();
 
-const expectations = require('../expectations/expectations');
+const expectations = require('../../expectations/expectations');
 
 // MOCKS REQUIRED
-const mockReadYaml = require('./readYaml.mock');
-const loggerMock = require('./logger.mock');
+const mockReadYaml = require('../../mock/external/readYaml.mock');
+const loggerMock = require('../../mock/helpers/logger.mock');
 
 // MAIN MODULE TESTED REQUIRED
 let myConfigHelper;
@@ -17,7 +17,7 @@ let myConfigHelper;
 describe('ConfigHelper - Tests', () => {
   before((done) => {
     myConfigHelper = proxyquire(
-      '../../api/helpers/config.helper',
+      '../../../api/helpers/config.helper',
       {
         'read-yaml': mockReadYaml,
         '../helpers/log.helper': loggerMock,

@@ -5,7 +5,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const messageHelper = require('../../api/helpers/message.helper');
+const messageHelper = require('../../../api/helpers/message.helper');
 
 describe('Message Helper Tests', () => {
   it('buildGenericMessage - Successfully', () => {

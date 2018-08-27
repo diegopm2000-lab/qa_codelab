@@ -6,16 +6,16 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const proxyquire = require('proxyquire').noCallThru();
 
-const loggerMock = require('../helpers/logger.mock');
-const userRepositoryMock = require('../repositories/user.repository.mock');
-const expectations = require('../expectations/expectations');
+const loggerMock = require('../../mock/helpers/logger.mock');
+const userRepositoryMock = require('../../mock/repositories/user.repository.mock');
+const expectations = require('../../expectations/expectations');
 
 let userService;
 
 describe('User Service - Tests', () => {
   before(() => {
     userService = proxyquire(
-      '../../api/services/user.service',
+      '../../../api/services/user.service',
       {
         '../helpers/log.helper': loggerMock,
         '../repositories/user.repository': userRepositoryMock,

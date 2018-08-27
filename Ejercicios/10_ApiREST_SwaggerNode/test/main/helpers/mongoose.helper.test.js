@@ -1,7 +1,8 @@
 // mongoose.helper.test.js
 
-/* global describe, it, before, after */
+/* global describe, it, beforeEach, afterEach, before, after */
 
+const { expect } = require('chai');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 
@@ -13,15 +14,15 @@ const { Mockgoose } = require('mockgoose');
 
 const mockgoose = new Mockgoose(mongoose);
 
-const configHelperMock = require('../helpers/config.helper.mock');
-const loggerMock = require('../helpers/logger.mock');
+const configHelperMock = require('../../mock/helpers/config.helper.mock');
+const loggerMock = require('../../mock/helpers/logger.mock');
 
 let myMongooseHelper;
 
 describe('MongooseHelper - Tests', () => {
-  before((done) => {
+  beforeEach((done) => {
     myMongooseHelper = proxyquire(
-      '../../api/helpers/mongoose.helper',
+      '../../../api/helpers/mongoose.helper',
       {
         '../helpers/config.helper': configHelperMock,
         '../helpers/log.helper': loggerMock,
@@ -29,7 +30,7 @@ describe('MongooseHelper - Tests', () => {
     );
 
     mockgoose.prepareStorage().then(() => {
-      mongoose.connect('mongodb://example.com/TestingDB', (err) => {
+      mongoose.connect('mongodb://example.com/TestingDB', { useNewUrlParser: true }, (err) => {
         if (err) {
           done(err);
         } else {
@@ -39,7 +40,7 @@ describe('MongooseHelper - Tests', () => {
     });
   });
 
-  after(async () => {
+  afterEach(async () => {
     await mockgoose.helper.reset();
     await mongoose.disconnect();
     mockgoose.mongodHelper.mongoBin.childProcess.kill('SIGTERM');
@@ -80,65 +81,69 @@ describe('MongooseHelper - Tests', () => {
 
     it('connect - Test', async () => {
       // Launch operation
+      console.log('Primera conexion...');
       await myMongooseHelper.connect();
-      await myMongooseHelper.connect();
+      // Launch operation again, to test if there is an existing connection
+      
+      setTimeout(() => {
+        console.log('Segunda conexion...');
+        myMongooseHelper.connect()
+          .then(() => {
+          // Success
+          });
+      }, 5000);
+
       // assert(mySpy.calledWith(params));
     });
   });
-});
-
-// PRUEBA DEL FALLO DE CONEXION
-
-describe('MongooseHelper - Tests', () => {
-  before(() => {
-    myMongooseHelper = proxyquire(
-      '../../api/helpers/mongoose.helper',
-      {
-        '../helpers/config.helper': configHelperMock,
-        '../helpers/log.helper': loggerMock,
-      } // eslint-disable-line comma-dangle
-    );
-  });
 
   describe('connect - Failed connection Test', () => {
-    let mySpy;
     let myStub;
 
     before((done) => {
-      mySpy = sinon.spy(loggerMock, 'info');
-      myStub = sinon.stub(mongoose, 'connect').yields(new Error('Connection forced error', () => {
-      }));
+      myStub = sinon.stub(mongoose.Connection.prototype, 'on').yields(new Error('Connection forced error'));
       done();
     });
 
     after(async (done) => {
-      mySpy.restore();
       myStub.restore();
       done();
     });
 
-    it('connect - Failed connection Test', async (done) => {
-      try {
-        mongoose.connect('mongodb://example.com/TestingDB', (err) => {
-          try {
-            if (err) {
-              mockgoose.mongodHelper.mongoBin.childProcess.kill('SIGTERM');
-              done();
-            } else {
-              done(err);
-            }
-          } catch (error) {
-            // console.error(error.message);
-          }
+    it('connect - Failed connection Test', (done) => {
+      // Launch operation
+      myMongooseHelper.connect()
+        .then(() => {
+          done(new Error('Failed in testing the connection failure!'));
+        })
+        .catch(() => {
+          done();
         });
-      } catch (error) {
-        // console.log(`-------------------> Error final: ${error.message}`);
-      }
+    });
+  });
+
+  describe('connect - (ERROR) - Throwing Exception CASE', () => {
+    let myStub;
+
+    before((done) => {
+      myStub = sinon.stub(loggerMock, 'info').throws(new Error('Forced Error'));
+      done();
+    });
+
+    after((done) => {
+      myStub.restore();
+      done();
+    });
+
+    it('connect - Test', async () => {
+      // Expected Result
+      const messageError = 'Forced Error';
+
       // Launch operation
       try {
         await myMongooseHelper.connect();
       } catch (error) {
-        // console.error(error.message);
+        expect(error.message).to.equal(messageError);
       }
     });
   });

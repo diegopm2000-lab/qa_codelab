@@ -6,7 +6,7 @@ const { expect } = require('chai');
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 
-const loggerMock = require('../helpers/logger.mock');
+const loggerMock = require('../../mock/helpers/logger.mock');
 const { Mongoose } = require('mongoose');
 
 const mongoose = new Mongoose();
@@ -14,7 +14,7 @@ const mongoose = new Mongoose();
 const { Mockgoose } = require('mockgoose');
 
 const mockgoose = new Mockgoose(mongoose);
-const expectations = require('../expectations/expectations');
+const expectations = require('../../expectations/expectations');
 
 let User;
 
@@ -23,20 +23,20 @@ let userRepository;
 describe('UserRepository - Tests', () => {
   before((done) => {
     User = proxyquire(
-      '../../api/repositories/user',
+      '../../../api/repositories/user',
       {
         mongoose,
       } // eslint-disable-line comma-dangle
     );
     userRepository = proxyquire(
-      '../../api/repositories/user.repository',
+      '../../../api/repositories/user.repository',
       {
         '../helpers/log.helper': loggerMock,
         mongoose,
       } // eslint-disable-line comma-dangle
     );
     mockgoose.prepareStorage().then(() => {
-      mongoose.connect('mongodb://example.com/TestingDB', (err) => {
+      mongoose.connect('mongodb://example.com/TestingDB', { useNewUrlParser: true }, (err) => {
         if (err) {
           done(err);
         } else {

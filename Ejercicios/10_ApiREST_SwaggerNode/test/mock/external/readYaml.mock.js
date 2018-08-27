@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-const expectations = require('../expectations/expectations');
+const expectations = require('../../expectations/expectations');
 
 const PATH_CONFIG_FILES = './config';
 

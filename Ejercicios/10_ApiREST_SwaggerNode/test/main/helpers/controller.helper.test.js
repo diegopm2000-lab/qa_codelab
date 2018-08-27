@@ -3,7 +3,7 @@
 /* global describe, it */
 
 const { expect } = require('chai');
-const controllerHelper = require('../../api/helpers/controller.helper');
+const controllerHelper = require('../../../api/helpers/controller.helper');
 
 describe('Controller Helper Tests', () => {
   describe('buildError - Tests', () => {
