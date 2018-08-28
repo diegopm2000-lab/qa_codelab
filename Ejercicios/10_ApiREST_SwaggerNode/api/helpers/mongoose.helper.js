@@ -35,6 +35,7 @@ async function connect() {
         const { mongodatabase } = configHelper.getConfig();
         dbURI = `${mongodatabase.mongoURL}/${mongodatabase.database}`;
         log.info(`${MODULE_NAME} ${connect.name} --> Trying to connect to mongodb`);
+
         mongoose.connect(dbURI, { useNewUrlParser: true });
         const db = mongoose.connection;
 
@@ -54,6 +55,13 @@ async function connect() {
       reject(error);
     }
   });
+}
+
+async function disconnect() {
+  if (connected) {
+    mongoose.connection.close();
+    connected = false;
+  }
 }
 
 // //////////////////////////////////////////////////////////////////////////////
@@ -79,7 +87,11 @@ mongoose.connection.on('disconnected', () => {
   log.debug(`${MODULE_NAME} Event on disconnected --> Mongoose default connection disconnected`);
   connected = false;
   // console.log('MENSAJE DISCONNECTED');
-  setTimeout(connect, 5000);
+
+  // /////////////////////////////////////////////////////////////////////
+  // TODO COMENTADO EL SETTIMEOUT TEMPORALMENTE PARA LAS PRUEBAS!!!!
+  // setTimeout(connect, 5000);
+  // /////////////////////////////////////////////////////////////////////
 });
 
 // If the Node process ends, close the Mongoose connection
@@ -93,4 +105,5 @@ process.on('SIGINT', () => {
 
 module.exports = {
   connect,
+  disconnect,
 };

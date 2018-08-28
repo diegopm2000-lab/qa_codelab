@@ -30,20 +30,12 @@ describe('MongooseHelper - Tests', () => {
     );
 
     mockgoose.prepareStorage().then(() => {
-      mongoose.connect('mongodb://example.com/TestingDB', { useNewUrlParser: true }, (err) => {
-        if (err) {
-          done(err);
-        } else {
-          done();
-        }
-      });
+      done();
     });
   });
 
   afterEach(async () => {
-    await mockgoose.helper.reset();
-    await mongoose.disconnect();
-    mockgoose.mongodHelper.mongoBin.childProcess.kill('SIGTERM');
+    myMongooseHelper.disconnect();
   });
 
   describe('connect - (not connected yet) Test', () => {
@@ -62,7 +54,6 @@ describe('MongooseHelper - Tests', () => {
     it('connect - Test', async () => {
       // Launch operation
       await myMongooseHelper.connect();
-      // assert(mySpy.calledWith(params));
     });
   });
 
@@ -79,21 +70,25 @@ describe('MongooseHelper - Tests', () => {
       done();
     });
 
-    it('connect - Test', async () => {
+    it('connect - Test', (done) => {
       // Launch operation
-      console.log('Primera conexion...');
-      await myMongooseHelper.connect();
-      // Launch operation again, to test if there is an existing connection
-      
       setTimeout(() => {
-        console.log('Segunda conexion...');
         myMongooseHelper.connect()
           .then(() => {
-          // Success
+            // Success
           });
-      }, 5000);
+      }, 500);
+      // Launch operation again, to test if there is an existing connection
+      setTimeout(() => {
+        myMongooseHelper.connect()
+          .then(() => {
+            // Success
+          });
+      }, 1000);
 
-      // assert(mySpy.calledWith(params));
+      setTimeout(() => {
+        done();
+      }, 1500);
     });
   });
 
@@ -105,7 +100,7 @@ describe('MongooseHelper - Tests', () => {
       done();
     });
 
-    after(async (done) => {
+    after((done) => {
       myStub.restore();
       done();
     });
@@ -135,16 +130,15 @@ describe('MongooseHelper - Tests', () => {
       done();
     });
 
-    it('connect - Test', async () => {
-      // Expected Result
-      const messageError = 'Forced Error';
-
+    it('connect - Test', (done) => {
       // Launch operation
-      try {
-        await myMongooseHelper.connect();
-      } catch (error) {
-        expect(error.message).to.equal(messageError);
-      }
+      myMongooseHelper.connect()
+        .then(() => {
+          done(new Error('Failed in testing the Throwing Exception CASE'));
+        })
+        .catch(() => {
+          done();
+        });
     });
   });
 });
